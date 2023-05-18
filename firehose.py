@@ -34,17 +34,16 @@ def filter_change(change) -> bool:
             print("Bot edit by", change["user"])
         return False
     # Filter disallowed namespaces
-    elif change["namespace"] and change["namespace"] not in config.ENABLED_NS:
+    if change["namespace"] and change["namespace"] not in config.ENABLED_NS:
         if config.VERBOSE:
             print("Not an enabled namespace — NS =", change["namespace"])
         return False
     # Filter disallowed events
-    elif change["type"] not in config.ENABLED_EVENTS:
+    if change["type"] not in config.ENABLED_EVENTS:
         if config.VERBOSE:
             print("Not an enabled event — type =", change["type"])
         return False
-    else:
-        return True
+    return True
 
 
 def get_status(change) -> Union[str, None]:
@@ -56,8 +55,7 @@ def get_status(change) -> Union[str, None]:
         uri = change["meta"]["uri"]
         status = f"'User:{user}' created a new page called '{title}' — {uri}"
         return status
-    else:
-        return None
+    return None
 
 
 def post_mastodon(status) -> None:
