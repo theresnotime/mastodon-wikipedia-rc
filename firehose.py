@@ -9,7 +9,7 @@ def main() -> None:
     """Interate through the filtered stream and post edits to Mastodon"""
     streams = ["recentchange", "revision-create", "page-create"]
     stream = EventStreams(streams=streams)
-    stream.register_filter(server_name=config.WIKI_SITE)
+    stream.register_filter(server_name=config.WIKI_SITE, type=config.ENABLED_EVENTS)
 
     print("Listening for events...")
     while stream:
