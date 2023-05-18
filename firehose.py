@@ -64,10 +64,10 @@ def post_mastodon(status) -> None:
         mastodon = Mastodon(
             access_token=config.ACCESS_TOKEN, api_base_url=config.API_URL
         )
-        mastodon.toot(status)
+        mastodon.status_post(status=status, visibility="unlisted")
         print("Posted:", status)
         # Always sleep after posting to Mastodon
-        time.sleep(4)
+        time.sleep(5)
     else:
         print("Dry run, did not post:", status)
 
